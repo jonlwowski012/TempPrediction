@@ -1,4 +1,5 @@
 # Temperature Monitoring and Prediction Using a Modified Lambda Architecture
+A more detailed write up can be seen in this [report.](./report.pdf)
 
 ## Original Lambda Architecture
 ![alt text](lambda.png "Original Lambda Architecture")

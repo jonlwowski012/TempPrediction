@@ -12,3 +12,6 @@ A more detailed write up can be seen in this [report.](./Edge_Lambda_Mode.pdf)
 
 ## Modified Edge-Lambda Architecture for Temp Monitoring and Prediction
 ![alt text](edge-lambda-temp.png "Modified Edge-Lambda Architecture for Temp Monitoring and Prediction")
+
+## Output of the Visualization Application
+![alt text](prediction.png "Output of the Visualization Application")

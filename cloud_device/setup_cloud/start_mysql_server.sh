@@ -1,0 +1,11 @@
+docker run --name=mysql1 -d mysql/mysql-server
+echo "Run Command to get mysql database password: docker logs mysql1 2>&1 | grep GENERATED"
+echo "Run Command to get into mysql: docker exec -it mysql1 mysql -uroot -p"
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'cloud123';"
+echo "CREATE USER 'root'@'%' IDENTIFIED by 'cloud123';"
+echo "GRANT ALL PRIVILEGES on *.* TO 'root'@'%' WITH GRANT OPTION;"
+echo "CREATE DATABASE cloud;"
+echo "USE cloud;"
+echo "CREATE TABLE IF NOT EXISTS temps_found ( temp_id INT AUTO_INCREMENT, temp FLOAT NOT NULL, sensor_type INT NOT NULL, time_stamp TIMESTAMP, PRIMARY KEY (temp_id) ) ENGINE=INNODB;"
+echo "CREATE TABLE IF NOT EXISTS temps_predicted ( temp_id INT AUTO_INCREMENT, temp FLOAT NOT NULL, sensor_type INT NOT NULL, time_stamp TIMESTAMP, PRIMARY KEY (temp_id) ) ENGINE=INNODB;"
+echo "You may need to run this command: python3 -m pip install mysql-connector-python"

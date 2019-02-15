@@ -11,9 +11,9 @@
  
 <h1>Final Project: Temperature Prediction using Sensor Data</h1>
 <h2>Yellow Team</h2>
+<h3>Parsa Yousefi</h3>
 <h3>Jonathan Lwowski</h3>
-<h4>Update Rate of Speed Layer: {{speed_hz}} Hz</h4>
-<h4>Update Rate of Batch Layer: {{batch_hz}} Hz</h4>
+
 <!-- bar chart canvas element -->
 <canvas id="chart" width="600" height="400"></canvas>
  
@@ -21,6 +21,8 @@
 
    // bar chart data
    var barData = {
+      labels : [{% for temp in timestamps %} "{{temp[0]}}",
+                {% endfor %}],
       datasets : [
          {
 			label: "Actual Temps",
@@ -32,7 +34,9 @@
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
             bezierCurve : false,
-            data : {{ data_edge }},
+            data : [{% for temp in data_edge %}
+                "{{temp[1]}}",
+                {% endfor %}]
             },
           {
 			label: "Predicted Temps",
@@ -44,7 +48,9 @@
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
             bezierCurve : false,
-            data : {{ data_cloud }},
+            data : [{% for temp in data_cloud %}
+                "{{temp[1]}}",
+                {% endfor %}] 
 		  }
          ]
       }
@@ -66,7 +72,7 @@
    max = 15
    // draw bar chart
    var LineChartDemo = new Chart(mychart, {
-        type: "scatter",
+        type: "line",
         data: barData,
         scaleOverride: true,
         scaleSteps: steps,

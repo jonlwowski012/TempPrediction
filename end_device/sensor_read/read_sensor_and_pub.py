@@ -8,11 +8,13 @@ import os
 import yaml
 import json
 import signal
+import re
 
 # Read pi  cpu temp
 def measure_temp():
-	temp = os.popen("vcgencmd measure_temp").readline()
-	return (float(temp.replace("temp=","").replace("'C","")))
+	temp = os.popen("sudo hddtemp /dev/sda").readline()
+	temp = temp.split(" ")[-1]
+	return (float(temp[:-3]))
 
 # Establish outgoing connection to cloud RabbitMQ
 # Read config parameters for cloud RabbitMQ
@@ -74,7 +76,7 @@ if __name__ == '__main__':
 			temp = measure_temp()
 			publish_to_mq(temp,  time.strftime('%Y-%m-%d %H:%M:%S'))
 			# Record data every 1 seconds
-			time.sleep(1.0)
+			time.sleep(0.01)
 
 
 

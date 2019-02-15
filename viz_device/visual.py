@@ -3,6 +3,8 @@ from flask import Flask, render_template
 import mysql.connector
 import MySQLdb
 import yaml
+import datetime
+import time
 
 app = Flask(__name__)
 
@@ -48,26 +50,58 @@ edge_mydb.commit()
 
 @app.route('/')
 def sensor_data():
+	global total_time_batch, total_time_speed, count
 	while(1):
-		query = "SELECT * FROM (SELECT * FROM temps_found ORDER BY\
-		time_stamp DESC LIMIT 20) sub ORDER BY time_stamp ASC;"
+		query = "SELECT * FROM (SELECT * FROM temps_predicted ORDER BY\
+		time_stamp DESC LIMIT 5000) sub ORDER BY time_stamp ASC;"
 
 		cloud_mycursor.execute(query)
 		cloud_data = cloud_mycursor.fetchall()
+		start_time = cloud_data[0][-2]
+		end_time = cloud_data[-1][-2]
+		total_time_batch = (end_time-start_time)/len(cloud_data)
+
+
+		cloud_times = []
+		cloud_temps = []
+		for row in cloud_data:
+			print(row[3].timestamp())
+			cloud_times.append(row[3].timestamp()) 
+			cloud_temps.append(row[1])
+
+		cloud_out = []
+		for time_, temp in zip(cloud_times,cloud_temps):
+			cloud_out.append({'x': time_, 'y': temp})
+		cloud_out = str(cloud_out).replace('\'', '')
+
 
 		query = "SELECT * FROM (SELECT * FROM temps_found ORDER BY\
-		time_stamp DESC LIMIT 200) sub ORDER BY time_stamp ASC;"
+		time_stamp DESC LIMIT 20000) sub ORDER BY time_stamp ASC;"
 
 		edge_mycursor.execute(query)
 		edge_data = edge_mycursor.fetchall()
-		
+		start_time = edge_data[0][-2]
+		end_time = edge_data[-1][-2]
+		total_time_speed = (end_time-start_time)/len(edge_data)
+
+		edge_times = []
+		edge_temps = []
+		for row in edge_data:
+			edge_times.append(row[3].timestamp()) 
+			edge_temps.append(row[1])
+
+		edge_out = []
+		for time_, temp in zip(edge_times,edge_temps):
+			edge_out.append({'x': time_, 'y': temp})
+		edge_out = str(edge_out).replace('\'', '')
+
 		edge_mydb.commit()
 		cloud_mydb.commit()
 		
 		time_stamps = range(0,len(cloud_data+edge_data))
 		print(time_stamps)
-		cloud_data = edge_data+cloud_data
-		return render_template("index2.html", data_cloud=cloud_data, data_edge=edge_data, timestamps=time_stamps)
+		#cloud_data = edge_data+cloud_data
+		return render_template("index2.html", data_cloud=cloud_out, data_edge=edge_out, speed_hz=1/(total_time_speed.total_seconds()), batch_hz=1/(total_time_batch.total_seconds()))
 
 
 if(__name__ == '__main__'):

@@ -57,8 +57,8 @@ def sensor_data():
 
 		cloud_mycursor.execute(query)
 		cloud_data = cloud_mycursor.fetchall()
-		start_time = cloud_data[0][-2]
-		end_time = cloud_data[-1][-2]
+		start_time = cloud_data[0][-1]
+		end_time = cloud_data[-1][-1]
 		total_time_batch = (end_time-start_time)/len(cloud_data)
 
 
@@ -80,8 +80,8 @@ def sensor_data():
 
 		edge_mycursor.execute(query)
 		edge_data = edge_mycursor.fetchall()
-		start_time = edge_data[0][-2]
-		end_time = edge_data[-1][-2]
+		start_time = edge_data[0][-1]
+		end_time = edge_data[-1][-1]
 		total_time_speed = (end_time-start_time)/len(edge_data)
 
 		edge_times = []

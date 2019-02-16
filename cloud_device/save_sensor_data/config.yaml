@@ -1,11 +1,10 @@
-hostname: 172.17.0.3 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-username: guest
-password: guest
+hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+username: yellow
+password: test5243
 port: 5672
 
-mysql_hostname: 172.17.0.2 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-mysql_username: root
-mysql_password: cloud123
-mysql_database: cloud
+mysql_hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+mysql_username: lambda
+mysql_password: test5243
+mysql_database: lambda
 mysql_port: 3306
-

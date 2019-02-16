@@ -1,22 +1,21 @@
-# Database Configuration:
-cloud_hostname: 172.17.0.3 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-cloud_username: guest
-cloud_password: guest
+cloud_hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+cloud_username: yellow
+cloud_password: test5243
 cloud_port: 5672
 
-edge_hostname: 172.17.0.3 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-edge_username: guest
-edge_password: guest
+edge_hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+edge_username: yellow
+edge_password: test5243
 edge_port: 5672
 
-cloud_mysql_hostname: 172.17.0.2 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-cloud_mysql_username: root
-cloud_mysql_password: cloud123
-cloud_mysql_database: cloud
+cloud_mysql_hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+cloud_mysql_username: lambda
+cloud_mysql_password: test5243
+cloud_mysql_database: lambda
 cloud_mysql_port: 3306
 
-edge_mysql_hostname: 172.17.0.2 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
-edge_mysql_username: root
-edge_mysql_password: cloud123
-edge_mysql_database: cloud
+edge_mysql_hostname: 129.114.111.193 # sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+edge_mysql_username: lambda
+edge_mysql_password: test5243
+edge_mysql_database: lambda
 edge_mysql_port: 3306

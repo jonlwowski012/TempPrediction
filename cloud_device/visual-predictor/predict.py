@@ -46,7 +46,7 @@ while(1):
 	#history.append(yhat[0])
 	#del history[0]
 	# Save temp into mysql
-	time_in = temps_found[-1,-2] #datetime.now()
+	time_in = temps_found[-1,-1] #datetime.now()
 	for delta,temp in enumerate(yhat):		
 		sql = "INSERT INTO temps_predicted(temp, sensor_type,  time_stamp) VALUES (%s, %s, %s)"
 		val = (float(temp), 4, time_in+timedelta(seconds=delta))
